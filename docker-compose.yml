@@ -20,12 +20,14 @@ services:
             - fakecam
         read_only: true
         volumes:
-            - ${IMAGE_BACKGROUND}:/src/background-custom:ro
-            - ${IMAGE_FOREGROUND}:/src/foreground-custom:ro
-            - ${IMAGE_FOREGROUND_MASK}:/src/foreground-mask-custom:ro
+          - ./background.jpg:/src/background.jpg:ro
+        #   - /path/to/foreground.jpg:/src/foreground.jpg:ro
+        #   - /path/to/foreground-mask.png:/src/foreground-mask.png:ro
         devices:
-            - ${VIDEO_INPUT}:/dev/video0
-            - ${VIDEO_OUTPUT}:/dev/video2
+            # input (webcam)
+            - /dev/video0:/dev/video0
+            # output (virtual webcam)
+            - /dev/video4:/dev/video2
         depends_on:
             - bodypix
         command: ["--bodypix-url", "http://bodypix:9000/",

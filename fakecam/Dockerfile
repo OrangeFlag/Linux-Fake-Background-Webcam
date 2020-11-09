@@ -1,12 +1,14 @@
-FROM debian:bullseye
+FROM debian
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y \
       python3 \
       python3-pip \
       python3-numpy \
       python3-opencv \
       python3-requests \
+      python3-setuptools \
+      gcc \ 
       && rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
 WORKDIR /src
